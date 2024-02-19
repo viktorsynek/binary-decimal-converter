@@ -1,6 +1,16 @@
+############################################   -== INFORMATION ==-   ############################################
+
+#### THE PROGRAM WAS CREATED AND PUBLISHED BY:
+#### https://github.com/viktorsynek
+#### https://www.linkedin.com/in/viktor-synek/
+
+#############################################   -== PROGRAM ==-   ###############################################
+
+#IMPORT LIBRARIES
 import time
 
 def another():
+    # IF USER INPUTS "N" THE PROGRAM STOPS
     print("Do you want to convert another? (Y/N)")
     another = input("Input: ").lower()
     
@@ -19,8 +29,10 @@ def choose_program():
     time.sleep(2)
     print("Type: 1 if the first one, 2 if the second one!")
     try:
+        # USER GIVES WHICH PROGRAM DO THEY WANT TO WORK WITH (1/2)
         choose = int(input("You: "))
         while 1:
+            # DECIMAL -> BIN
             if choose == 1:
                 time.sleep(1)
                 print("Great, now enter a decimal number: ")
@@ -28,6 +40,7 @@ def choose_program():
                 print(decimal_to_binary(num))
                 time.sleep(1)        
                 another()
+            # BIN -> DECIMAL
             elif choose == 2:
                 time.sleep(1)
                 print("Great, now enter a binary number:")
@@ -39,38 +52,29 @@ def choose_program():
                 print("Enter 1 or 2!")
                 choose = int(input("You: "))
                 continue
+    # HANDLE NOT NUMERIC INPUTS
     except ValueError:
         print("Enter a numeric value! (1/2)")
         choose_program()
 
 
-
+# DECIMAL -> BINARY WITHOUT BUILT-IN FUNCTIONS
 def decimal_to_binary(num):
-    lst = []
-
-    while (num != 0):
-        x = num % 2
-        lst.append(x)
-        num = num//2
-
-    lst.reverse()
     result = ""
-    for i in lst:
-        result += str(i)
-
+    while num > 0:
+        remainder = num % 2
+        result = str(remainder) + result
+        num //= 2
     return result
-
+    
+# BINARY -> DECIMAL WITHOUT BUILT-IN FUNCTIONS
 def binary_to_decimal(num):
-    i = 0
     result = 0
-
-    while num != 0:
-        x = num % 10
-        x = x * 2**i
+    i = 0
+    while num > 0:
+        result += (num % 10) << i
+        num //= 10
         i += 1
-        result += x
-        num = num // 10
-
     return result
 
 
